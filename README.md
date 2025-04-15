@@ -6,6 +6,7 @@
 - Marina Mendes Durand;
 - Tarsila Amado Alves de Brito;
 - Vinícius Mergulhão Teti. 
+
 **Funções:**
 
 - Back: Lucas Ribeiro D’azevedo; 
