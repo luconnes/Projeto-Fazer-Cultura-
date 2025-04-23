@@ -10,7 +10,7 @@
 **Funções:**
 
 - Back: Lucas Ribeiro D’azevedo; 
-- Documentação: Marina Mendes Durand; 
+- Front: Marina Mendes Durand; 
 - Front: Tarsila Amado Alves de Brito;  
 - Full: Vinícius Mergulhão Teti. 
 
