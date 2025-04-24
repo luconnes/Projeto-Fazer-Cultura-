@@ -31,7 +31,7 @@ Abaixo estão as User Stories (US) planejadas para o desenvolvimento do projeto.
 
 ### 📌 US1 - Autenticação de usuários
 <p align="center">
-  <img src="./e4694e39-742b-4516-ba15-df5942ff58b1.png" alt="User Story 1 - Aumentar o cursor" width="600"/>
+  <img src="Screenshot 2025-04-23 223809.png" width="600"/>
 </p>
 
 ---
