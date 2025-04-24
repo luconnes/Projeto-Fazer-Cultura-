@@ -103,3 +103,37 @@ https://trello.com/b/80TuSZGX/fazer-cultura
 
 ---
 ### 
+
+## 📝 Screencast
+
+Abaixo estão os screencasts das principais funcionalidades do nosso aplicativo.
+
+## 📝 Screencast
+
+Abaixo estão os screencasts das principais funcionalidades do nosso aplicativo.
+
+---
+
+### ▶️ Watch Party
+[![Watch Party](https://img.youtube.com/vi/JMp9uhNdX0k/0.jpg)](https://youtu.be/JMp9uhNdX0k)
+
+---
+
+### ▶️ Upload de Conteúdo
+[![Upload de Conteúdo](https://img.youtube.com/vi/IfDuwcEMpiE/0.jpg)](https://youtu.be/IfDuwcEMpiE)
+
+---
+
+### ▶️ Avaliação de Conteúdo
+[![Avaliação de Conteúdo](https://img.youtube.com/vi/aYFXQS46QoU/0.jpg)](https://youtu.be/aYFXQS46QoU)
+
+---
+
+### ▶️ Ranking
+[![Ranking](https://img.youtube.com/vi/6lsonRvk5Gw/0.jpg)](https://youtu.be/6lsonRvk5Gw)
+
+---
+
+### ▶️ Login
+[![Login](https://img.youtube.com/vi/SDion2-ioag/0.jpg)](https://youtu.be/SDion2-ioag)
+
