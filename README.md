@@ -108,10 +108,6 @@ https://trello.com/b/80TuSZGX/fazer-cultura
 
 Abaixo estão os screencasts das principais funcionalidades do nosso aplicativo.
 
-## 📝 Screencast
-
-Abaixo estão os screencasts das principais funcionalidades do nosso aplicativo.
-
 ---
 
 ### ▶️ Watch Party
