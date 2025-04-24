@@ -29,9 +29,9 @@ Queremos ampliar o acesso da população à arte nacional. Inicialmente, o foco 
 
 Abaixo estão as User Stories (US) planejadas para o desenvolvimento do projeto. Cada item poderá ser ilustrado com uma imagem que representa a funcionalidade ou tela correspondente.
 
-### 📌 US1 
+### 📌 US1 - Autenticação de usuários
 <p align="center">
-  <img src="URL_DA_IMAGEM_US1" alt="User Story 1" width="600"/>
+  <img src="./e4694e39-742b-4516-ba15-df5942ff58b1.png" alt="User Story 1 - Aumentar o cursor" width="600"/>
 </p>
 
 ---
