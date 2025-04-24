@@ -1,7 +1,7 @@
 # 🎬 Projeto Fazer Cultura
 
-> Plataforma de streaming dedicada à divulgação de produções artísticas nacionais, com foco em artistas independentes e estudantes.
----
+Plataforma de streaming dedicada à divulgação de produções artísticas nacionais, com foco em artistas independentes e estudantes.
+
 
 ## 👥 Equipe
 
@@ -96,3 +96,10 @@ Abaixo estão as User Stories (US) planejadas para o desenvolvimento do projeto.
 <p align="center">
   <img src="Screenshot 2025-04-23 224628.png" alt="User Story 10" width="600"/>
 </p>
+
+---
+### Trello: 
+https://trello.com/b/80TuSZGX/fazer-cultura
+
+---
+### 
