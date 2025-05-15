@@ -31,70 +31,70 @@ Abaixo estão as User Stories (US) planejadas para o desenvolvimento do projeto.
 
 ### 📌 US1 - Autenticação de usuários
 <p align="center">
-  <img src="Screenshot 2025-04-23 224407.png" alt="User Story 2" width="600"/>
+  <img src="Telas/Screenshot 2025-04-23 224407.png" alt="User Story 2" width="600"/>
 </p>
 
 ---
 
 ### 📌 US2 
 <p align="center">
-  <img src="Screenshot 2025-04-23 224518 - Copia.png" alt="User Story 2" width="600"/>
+  <img src="Telas/Screenshot 2025-04-23 224518 - Copia.png" alt="User Story 2" width="600"/>
 </p>
 
 ---
 
 ### 📌 US3 
 <p align="center">
-  <img src="Screenshot 2025-04-23 224527.png" alt="User Story 3" width="600"/>
+  <img src="Telas/Screenshot 2025-04-23 224527.png" alt="User Story 3" width="600"/>
 </p>
 
 ---
 
 ### 📌 US4 
 <p align="center">
-  <img src="Screenshot 2025-04-23 224543.png" alt="User Story 4" width="600"/>
+  <img src="Telas/Screenshot 2025-04-23 224543.png" alt="User Story 4" width="600"/>
 </p>
 
 ---
 
 ### 📌 US5 
 <p align="center">
-  <img src="Screenshot 2025-04-23 224553.png" alt="User Story 5" width="600"/>
+  <img src=" Telas/Screenshot 2025-04-23 224553.png" alt="User Story 5" width="600"/>
 </p>
 
 ---
 
 ### 📌 US6 
 <p align="center">
-  <img src="Screenshot 2025-04-23 224600.png" alt="User Story 6" width="600"/>
+  <img src="Telas/Screenshot 2025-04-23 224600.png" alt="User Story 6" width="600"/>
 </p>
 
 ---
 
 ### 📌 US7 
 <p align="center">
-  <img src="Screenshot 2025-04-23 224609.png" alt="User Story 7" width="600"/>
+  <img src="Telas/Screenshot 2025-04-23 224609.png" alt="User Story 7" width="600"/>
 </p>
 
 ---
 
 ### 📌 US8 
 <p align="center">
-  <img src="Screenshot 2025-04-23 224615.png" alt="User Story 8" width="600"/>
+  <img src=" Telas/Screenshot 2025-04-23 224615.png" alt="User Story 8" width="600"/>
 </p>
 
 ---
 
 ### 📌 US9 
 <p align="center">
-  <img src="Screenshot 2025-04-23 224622.png" alt="User Story 9" width="600"/>
+  <img src="Telas/Screenshot 2025-04-23 224622.png" alt="User Story 9" width="600"/>
 </p>
 
 ---
 
 ### 📌 US10 
 <p align="center">
-  <img src="Screenshot 2025-04-23 224628.png" alt="User Story 10" width="600"/>
+  <img src="Telas/Screenshot 2025-04-23 224628.png" alt="User Story 10" width="600"/>
 </p>
 
 ---
