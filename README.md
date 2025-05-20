@@ -134,3 +134,9 @@ Abaixo estão os screencasts das principais funcionalidades do nosso aplicativo.
 [![Login](https://img.youtube.com/vi/SDion2-ioag/0.jpg)](https://youtu.be/SDion2-ioag)
 
 <p align="left"> <a href="https://www.cprogramming.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/c/c-original.svg" alt="c" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/>  </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://www.blender.org/" target="_blank" rel="noreferrer"> <img src="https://download.blender.org/branding/community/blender_community_badge_white.svg" alt="blender" width="40" height="40"/> </a> </p>
+
+---
+### EVIDÊNCAS: PROGRAMAÇÃO EM PARES 
+[![image](https://github.com/user-attachments/assets/6a54b0d9-cdf0-43e9-94d9-982c25f099c4)
+[![image](https://github.com/user-attachments/assets/ab6159b0-1102-4282-a6f0-0b0dc21e9816)
+
