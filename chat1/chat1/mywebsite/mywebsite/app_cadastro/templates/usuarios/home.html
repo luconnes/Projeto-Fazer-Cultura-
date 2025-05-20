@@ -1,0 +1,19 @@
+
+{% block conteudo %}
+<body style="background: linear-gradient(to top,#101110 20%, #63d66f 80%); background-repeat: no-repeat; height: 100vh; margin: 0; ">
+
+<form action="{%url 'listagem_usuarios'%}" method="post">
+{% csrf_token %}
+<div style="text-align: center;" class="container">
+  {% load static %}
+  <h1> <img src="{% static 'usuarios/teste_icon.png' %}"> </h1>
+    E-mail <input class="form-control-sm" name="email" type="text">
+    <h1>  </h1>
+    Senha <input class="form-control-sm" name="senha" type="text">
+    <h1>  </h1>
+    <button class="form-control-sm" >Acessar</button>
+    <h5> Ainda não tem uma conta? Cadastre-se</h5>
+</div>
+</form>
+
+{% endblock %}
