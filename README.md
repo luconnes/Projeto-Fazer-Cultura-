@@ -140,3 +140,29 @@ Abaixo estão os screencasts das principais funcionalidades do nosso aplicativo.
 [![image](https://github.com/user-attachments/assets/6a54b0d9-cdf0-43e9-94d9-982c25f099c4)
 [![image](https://github.com/user-attachments/assets/ab6159b0-1102-4282-a6f0-0b0dc21e9816)
 
+
+
+---
+### SCREEN CAST: SISTEMA
+[![chat em tempo real](https://github.com/user-attachments/assets/f2a66f0e-99f0-4cee-a9d7-b2e785b9dd4d)
+
+---
+[![video 2](https://github.com/user-attachments/assets/653b276a-cb19-40a7-b273-13f2672e8105)
+
+
+---
+[![video 3](https://github.com/user-attachments/assets/ac408cf8-7b4d-4e45-a9a0-5499dd618e87)
+
+
+---
+
+### DIAGRAMAS
+[![WhatsApp Image 2025-05-20 at 10 31 05](https://github.com/user-attachments/assets/334e9926-7399-4cdb-bf35-b16fdfa9d1a7)
+
+
+[![WhatsApp Image 2025-05-20 at 10 39 00](https://github.com/user-attachments/assets/2ba2428a-6f18-436e-ad15-fcab018139b9)
+
+
+[![WhatsApp Image 2025-05-21 at 10 42 21](https://github.com/user-attachments/assets/15c68a39-91bf-4d63-97c1-6ac2e7f38187)
+
+
