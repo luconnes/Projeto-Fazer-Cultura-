@@ -31,7 +31,7 @@
 
     <script type="text/javascript">
         let ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
-        let url = `https://fazer-cultura1-db9bb7e9b88b.herokuapp.com/chat/`;
+        let url = `${ws_scheme}://fazer-cultura1-db9bb7e9b88b.herokuapp.com/chat/`;
         const chatSocket = new WebSocket(url);
 
         chatSocket.onmessage = function(e){
@@ -40,20 +40,29 @@
 
             if(data.type === 'chat'){
                 let messages = document.getElementById('messages');
-
-                messages.insertAdjacentHTML('beforeend', `<div>
-                                            <p>${data.message}</p>
-                                        </div>`);
+                messages.insertAdjacentHTML('beforeend', `<div><p>${data.message}</p></div>`);
             }
         }
+
+        chatSocket.onerror = function(error) {
+            console.error('Erro no WebSocket:', error);
+        };
+
+        chatSocket.onclose = function(event) {
+            console.warn('WebSocket fechado:', event);
+        };
 
         let form = document.getElementById('form');
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             let message = e.target.message.value;
-            chatSocket.send(JSON.stringify({
-                'message': message
-            }));
+            if (chatSocket.readyState === WebSocket.OPEN) {
+                chatSocket.send(JSON.stringify({
+                    'message': message
+                }));
+            } else {
+                console.error("WebSocket não está conectado.");
+            }
             form.reset();
         });
     </script>
