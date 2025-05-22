@@ -30,43 +30,48 @@
     <div style="text-align: center;" id="messages"></div>
 
     <script type="text/javascript">
+        // Suporte a ambiente de produção (HTTPS) e local (HTTP)
         let ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
-        let url = `${ws_scheme}://fazer-cultura1-db9bb7e9b88b.herokuapp.com/ws/socket-server/`;
+        let url = '${ws_scheme}://${window.location.host}/ws/socket-server/';
+
         const chatSocket = new WebSocket(url);
 
-        chatSocket.onmessage = function(e){
+        chatSocket.onmessage = function(e) {
             let data = JSON.parse(e.data);
             console.log('Data:', data);
 
-            if(data.type === 'chat'){
+            if (data.type === 'chat') {
                 let messages = document.getElementById('messages');
-                messages.insertAdjacentHTML('beforeend', `<div><p>${data.message}</p></div>`);
+                messages.insertAdjacentHTML('beforeend', `
+                    <div>
+                        <p>${data.message}</p>
+                    </div>
+                `);
             }
         }
 
-        chatSocket.onerror = function(error) {
-            console.error('Erro no WebSocket:', error);
-        };
+        chatSocket.onopen = function() {
+            console.log("WebSocket conectado com sucesso.");
+        }
 
-        chatSocket.onclose = function(event) {
-            console.warn('WebSocket fechado:', event);
-        };
+        chatSocket.onerror = function(error) {
+            console.error("Erro no WebSocket:", error);
+        }
+
+        chatSocket.onclose = function(e) {
+            console.warn("WebSocket fechado:", e);
+        }
 
         let form = document.getElementById('form');
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             let message = e.target.message.value;
-            if (chatSocket.readyState === WebSocket.OPEN) {
-                chatSocket.send(JSON.stringify({
-                    'message': message
-                }));
-            } else {
-                console.error("WebSocket não está conectado.");
-            }
+            chatSocket.send(JSON.stringify({
+                'message': message
+            }));
             form.reset();
         });
     </script>
 </body>
 </html>
-
 {% endblock %}
