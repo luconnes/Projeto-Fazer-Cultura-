@@ -31,7 +31,7 @@
 
     <script type="text/javascript">
         // Suporte a ambiente de produção (HTTPS) e local (HTTP)
-        let url = 'https://fazer-cultura1-db9bb7e9b88b.herokuapp.com';
+        let url = 'wss://${window.location.host}/ws/socket-server/';
 
         const chatSocket = new WebSocket(url);
 
