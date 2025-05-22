@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        Fazer Cultura
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body style="background: linear-gradient(to top,#101110 20%, #63d66f 80%); background-repeat: no-repeat; height: 100vh; margin: 0; ">
+    <nav style="background: linear-gradient(to right, #005918 40%, #64E286 60%);" class="navbar navbar-expand-lg navbar-light bg-light">
+        {% load static %} 
+        <a class="navbar-brand" href="{% url 'home' %}">
+          <img src="{% static 'usuarios/iconeb.png' %}" alt="Ícone">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Curtas</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Adição de Conteúdo</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Watch Party</a>
+            </li>
+          </ul>
+        </div>
+    </nav>
+
+    {% block conteudo %}
+    {% endblock %}
+
+    <div class="container">{% block content %}{% endblock %}</div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
