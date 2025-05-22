@@ -1,1 +1,1 @@
-web: gunicorn mywebsite.wsgi
+web: daphne chat.asgi:application
