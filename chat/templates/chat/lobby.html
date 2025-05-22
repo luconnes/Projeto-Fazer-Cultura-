@@ -8,7 +8,6 @@
   }
 </style>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,50 +15,47 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Lobby</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-
 </head>
 <body>
     <div style="text-align: center;" class="container">
-    <h1>Mande sua mensagem!</h1>
+        <h1>Mande sua mensagem!</h1>
 
-    <form id="form">
-        <input class="form-control-sm" name="message" type="text"/>
-        <h1> </h1>
-        <div style="text-align: center;"> <h5> Log de mensagens: </h5></div>
-    </form>
-
+        <form id="form">
+            <input class="form-control-sm" name="message" type="text"/>
+            <h1> </h1>
+            <div style="text-align: center;"> <h5> Log de mensagens: </h5></div>
+        </form>
     </div>
 
-    <div style="text-align: center;"  id="messages"></div>
+    <div style="text-align: center;" id="messages"></div>
 
     <script type="text/javascript">
-        let url = `ws://${window.location.host}/ws/socket-server/`
-
-        const chatSocket = new WebSocket(url)
+        let ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
+        let url = `${ws_scheme}://${window.location.host}/ws/socket-server/`;
+        const chatSocket = new WebSocket(url);
 
         chatSocket.onmessage = function(e){
-            let data = JSON.parse(e.data)
-            console.log('Data:', data)
+            let data = JSON.parse(e.data);
+            console.log('Data:', data);
 
             if(data.type === 'chat'){
-                let messages = document.getElementById('messages')
+                let messages = document.getElementById('messages');
 
                 messages.insertAdjacentHTML('beforeend', `<div>
-                                        <p>${data.message}</p>
-                                    </div>`)
+                                            <p>${data.message}</p>
+                                        </div>`);
             }
         }
 
-        let form = document.getElementById('form')
-        form.addEventListener('submit', (e)=> {
-            e.preventDefault()
-            let message = e.target.message.value 
+        let form = document.getElementById('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let message = e.target.message.value;
             chatSocket.send(JSON.stringify({
-                'message':message
-            }))
-            form.reset()
-        })
-
+                'message': message
+            }));
+            form.reset();
+        });
     </script>
 </body>
 </html>
