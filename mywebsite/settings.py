@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-n96)vr%##q@5_rwpt3x39mc!$4d%no3*^tcnxc)p1_nhn8&^wx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://fazer-cultura1-db9bb7e9b88b.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
