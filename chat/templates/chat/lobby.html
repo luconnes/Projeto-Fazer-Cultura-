@@ -31,7 +31,7 @@
 
     <script type="text/javascript">
         let ws_scheme = window.location.protocol === "https:" ? "wss" : "ws";
-        let url = `${ws_scheme}://fazer-cultura1-db9bb7e9b88b.herokuapp.com/chat/`;
+        let url = `${ws_scheme}://fazer-cultura1-db9bb7e9b88b.herokuapp.com/ws/socket-server/`;
         const chatSocket = new WebSocket(url);
 
         chatSocket.onmessage = function(e){
