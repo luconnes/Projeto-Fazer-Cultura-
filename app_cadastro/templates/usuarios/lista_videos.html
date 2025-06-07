@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Vídeos</title>
+</head>
+<body>
+    <h1>Vídeos</h1>
+    <a href="{% url 'enviar_video' %}">Enviar Novo Vídeo</a>
+    <ul>
+        {% for video in videos %}
+            <li>
+                <strong>{{ video.titulo }}</strong><br>
+                <video width="320" height="240" controls>
+                    <source src="{{ video.arquivo.url }}" type="video/mp4">
+                    Seu navegador não suporta a tag de vídeo.
+                </video>
+            </li>
+        {% empty %}
+            <li>Não há vídeos disponíveis.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

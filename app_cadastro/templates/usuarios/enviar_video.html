@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Enviar Vídeo</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        <p>Olá, {{ user.username }}! <a href="{% url 'logout' %}">Sair</a></p>
+    {% else %}
+        <a href="{% url 'login' %}">Entrar</a>
+    {% endif %}
+
+    <h2>Enviar Vídeo</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enviar</button>
+    </form>
+    <a href="{% url 'lista_videos' %}">Ver vídeos</a>
+</body>
+</html>
