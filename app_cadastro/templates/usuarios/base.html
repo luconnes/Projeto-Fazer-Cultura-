@@ -9,15 +9,17 @@
       {% endblock %}
     </title>
 
-{% load static %}
-    <link rel="icon" href= "{% static 'usuarios/iconeb.png' %}"
-          type="image/icon">
+    {% load static %}
+    <link rel="icon" href="{% static 'usuarios/iconeb.png' %}" type="image/icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
   </head>
-  <body style="background: linear-gradient(to top,#101110 20%, #63d66f 80%); background-repeat: no-repeat; height: 100vh; margin: 0; ">
+
+  <body style="background: linear-gradient(to top,#101110 20%, #63d66f 80%); background-repeat: no-repeat; height: 100vh; margin: 0;">
+
+    {% if exibir_navbar != False %}
     <nav style="background: linear-gradient(to right, #005918 40%, #64E286 60%);" class="navbar navbar-expand-lg navbar-light bg-light">
         {% load static %} 
-        <a class="navbar-brand" href="{% url 'home' %}">
+        <a class="navbar-brand" href="{% url 'login' %}">
           <img src="{% static 'usuarios/iconeb.png' %}" alt="Ícone">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -36,17 +38,21 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Watch Party</a>
             </li>
-            <li class="nav-item"></li>
+            <li class="nav-item">
               <a class="nav-link" href="{% url 'chat' %}"> Chat </a>
             </li>
           </ul>
         </div>
     </nav>
+    {% endif %}
 
     {% block conteudo %}
     {% endblock %}
 
-    <div class="container">{% block content %}{% endblock %}</div>
+    <div class="container">
+      {% block content %}
+      {% endblock %}
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
