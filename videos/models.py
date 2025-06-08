@@ -7,7 +7,10 @@ class Video(models.Model):
     arquivo = models.FileField(upload_to='videos/')
     data_envio = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE)
+    avaliacao = models.IntegerField(default=0)  # ⬅️ campo adicionado aqui
 
     def __str__(self):
         return self.titulo
+    
+
 

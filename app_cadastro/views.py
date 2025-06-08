@@ -111,3 +111,5 @@ def lista_videos(request):
 
     videos = Video.objects.all().order_by('-data_envio')
     return render(request, 'usuarios/lista_videos.html', {'videos': videos})
+
+

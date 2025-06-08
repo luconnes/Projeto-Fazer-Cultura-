@@ -11,5 +11,6 @@ urlpatterns = [
     path('painel/', views.painel, name='painel'),
     path('enviar/', views.enviar_video, name='enviar_video'),
     path('lista_videos/', views.lista_videos, name='lista_videos'),
+
     
 ]
