@@ -1,0 +1,40 @@
+{% load static %}
+
+<title>
+      {% block title %}
+        Fazer Cultura
+      {% endblock %}
+</title>
+
+{% block conteudo %}
+<link rel="icon" href="{% static 'usuarios/iconeb.png' %}" type="image/icon" />
+<body style="background: linear-gradient(to top,#101110 20%, #63d66f 80%); background-repeat: no-repeat; height: 100vh; margin: 0; ">
+
+<form method="post">
+    {% csrf_token %}
+    <div style="text-align: center;" class="container">
+        <h1><img src="{% static 'usuarios/teste_icon.png' %}"></h1>
+
+        <p>
+            E-mail<br>
+            <input class="form-control-sm" name="email" type="text" value="{{ form.email.value|default:'' }}">
+            {% if form.email.errors %}
+                <div style="color: red;">{{ form.email.errors.0 }}</div>
+            {% endif %}
+        </p>
+
+        <p>
+            Senha<br>
+            <input class="form-control-sm" name="senha" type="password">
+            {% if form.senha.errors %}
+                <div style="color: red;">{{ form.senha.errors.0 }}</div>
+            {% endif %}
+        </p>
+
+        <button class="form-control-sm" type="submit">Cadastrar</button>
+        <h5>Já tem uma conta? <a href="{% url 'login' %}">Faça login</a></h5>
+    </div>
+</form>
+
+</body>
+{% endblock %}

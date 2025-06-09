@@ -1,0 +1,8 @@
+{% extends 'usuarios/base.html' %}
+{% block conteudo %}
+<div style="text-align: center;">
+  <h2>Bem-vindo, {{ email }}</h2>
+  <p>Você está logado no Fazer Cultura!</p>
+  <a href="{% url 'logout' %}">Sair</a>
+</div>
+{% endblock %}

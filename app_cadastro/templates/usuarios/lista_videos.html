@@ -1,0 +1,175 @@
+{% extends 'usuarios/base.html' %}
+{% block conteudo %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Vídeos</title>
+    <style>
+        /* Estilos para as estrelas de avaliação */
+        .rating {
+            display: inline-block;
+            direction: rtl; /* Para que as estrelas comecem da direita para a esquerda */
+            unicode-bidi: bidi-override; /* Permite a sobreposição bidirecional */
+        }
+        .rating input {
+            display: none; /* Esconde os inputs de rádio padrão */
+        }
+        .rating label {
+            font-size: 30px; /* Tamanho das estrelas */
+            color: #ccc; /* Cor padrão das estrelas (cinza) */
+            cursor: pointer; /* Mudar cursor ao passar sobre a estrela */
+            padding: 0 5px; /* Espaçamento entre as estrelas */
+        }
+        /* Cor das estrelas ao passar o mouse ou quando selecionadas */
+        .rating label:hover,
+        .rating label:hover ~ label,
+        .rating input:checked ~ label {
+            color: gold; /* Cor dourada para estrelas selecionadas ou com hover */
+        }
+
+        /* Classe para ocultar a seção de avaliação por padrão */
+        .rating-section-hidden {
+            display: none;
+        }
+
+        /* Estilo para a borda entre os vídeos, como na sua imagem*/
+        li {
+            border-bottom: 1px solid #ddd; /* Linha sutil entre os itens da lista */
+            padding-bottom: 20px; /* Espaço abaixo de cada vídeo */
+            margin-bottom: 20px; /* Margem para separar os blocos */
+        }
+        li:last-child {
+            border-bottom: none; /* Remove a borda do último item */
+        }
+    </style>
+</head>
+<body>
+    <div class="container"> {# Adicionado para centralizar o conteúdo, se o seu base.html não fizer isso #}
+        <h1 style="color: black;">Vídeos</h1>
+        <a href="{% url 'enviar_video' %}" class="btn btn-primary mb-3">Enviar Novo Vídeo</a> {# Adicionado estilo Bootstrap para o botão #}
+        <ul style="list-style-type: none; padding: 0;"> {# Remove os marcadores de lista padrão #}
+            {% for video in videos %}
+                <li>
+                    <h3 style="color: black;">{{ video.titulo }}</h3> {# Adicionado estilo para o título #}
+                    <video id="video-{{ video.id }}" width="500" height="300" controls> {# Aumentei o tamanho do vídeo para melhor visualização #}
+                        <source src="{{ video.arquivo.url }}" type="video/mp4">
+                        Seu navegador não suporta a tag de vídeo.
+                    </video>
+                    {# Adicionado descrição e informações do usuário que faltavam no seu original #}
+                    <p style="color: black;">Descrição: {{ video.descricao }}</p>
+                    <p style="color: black;">Enviado por: {{ video.usuario.email }} em {{ video.data_envio|date:"d/m/Y H:i" }}</p>
+                    <p style="color: black;">Avaliação Média: <span id="avg-rating-{{ video.id }}">{{ video.avaliacao|floatformat:1 }}</span> estrelas</p>
+
+                    {# Seção de avaliação que aparecerá abaixo do vídeo #}
+                    <div id="rating-section-{{ video.id }}" class="rating-section-hidden">
+                        <h4 style="color: black;">Avalie este vídeo:</h4>
+                        <div class="rating">
+                            <input type="radio" id="star5-{{ video.id }}" name="rating-{{ video.id }}" value="5" /><label for="star5-{{ video.id }}">★</label>
+                            <input type="radio" id="star4-{{ video.id }}" name="rating-{{ video.id }}" value="4" /><label for="star4-{{ video.id }}">★</label>
+                            <input type="radio" id="star3-{{ video.id }}" name="rating-{{ video.id }}" value="3" /><label for="star3-{{ video.id }}">★</label>
+                            <input type="radio" id="star2-{{ video.id }}" name="rating-{{ video.id }}" value="2" /><label for="star2-{{ video.id }}">★</label>
+                            <input type="radio" id="star1-{{ video.id }}" name="rating-{{ video.id }}" value="1" /><label for="star1-{{ video.id }}">★</label>
+                        </div>
+                        <br>
+                        <button onclick="submitRating('{{ video.id }}')" class="btn btn-success mt-2">Enviar Avaliação</button>
+                        <p id="rating-message-{{ video.id }}" style="color: green; margin-top: 10px;"></p>
+                    </div>
+                    <hr> {# Linha divisória para separar os vídeos #}
+                </li>
+            {% empty %}
+                <li style="color: black;">Não há vídeos disponíveis.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            {% for video in videos %}
+                const videoElement_{{ video.id }} = document.getElementById('video-{{ video.id }}');
+                const ratingSection_{{ video.id }} = document.getElementById('rating-section-{{ video.id }}');
+
+                // Adiciona um listener para quando o vídeo terminar a reprodução
+                videoElement_{{ video.id }}.addEventListener('ended', function() {
+                    ratingSection_{{ video.id }}.classList.remove('rating-section-hidden'); // Torna a seção de avaliação visível
+                });
+
+                // Opcional: Para depuração, você pode querer que a seção de avaliação apareça sempre.
+                // Para isso, descomente a linha abaixo e remova a classe 'rating-section-hidden' do HTML na div.
+                // ratingSection_{{ video.id }}.classList.remove('rating-section-hidden');
+            {% endfor %}
+        });
+
+        // Função para enviar a avaliação via AJAX
+        function submitRating(videoId) {
+            const selectedRating = document.querySelector(`input[name="rating-${videoId}"]:checked`);
+            const ratingMessageElement = document.getElementById(`rating-message-${videoId}`);
+            const avgRatingElement = document.getElementById(`avg-rating-${videoId}`);
+
+            if (selectedRating) {
+                const nota = parseInt(selectedRating.value); // Garante que a nota seja um número inteiro
+
+                fetch('/videos/avaliar-video/', { // Endpoint da sua view de avaliação
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken') // Função para obter o CSRF token
+                    },
+                    body: JSON.stringify({ video_id: videoId, nota: nota })
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        // Se a resposta não for 2xx (ex: 401, 400, 500), tente ler a mensagem de erro
+                        return response.json().then(err => {
+                            throw new Error(err.message || `Erro do servidor: ${response.status}`);
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.status === 'success') {
+                        ratingMessageElement.textContent = data.message;
+                        ratingMessageElement.style.color = 'green';
+                        if (data.nova_media !== undefined) {
+                            // Mesmo que o backend salve um int, o frontend pode exibir o float real
+                            avgRatingElement.textContent = data.nova_media.toFixed(1);
+                        }
+                        // Opcional: desabilitar a avaliação após o envio para evitar múltiplas submissões
+                        // document.getElementById(`rating-section-${videoId}`).querySelectorAll('input, button').forEach(el => el.disabled = true);
+                    } else {
+                        // Este bloco pode ser redundante se o `!response.ok` tratar todos os erros
+                        ratingMessageElement.textContent = `Erro: ${data.message}`;
+                        ratingMessageElement.style.color = 'red';
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar avaliação:', error);
+                    ratingMessageElement.textContent = `Erro ao enviar avaliação: ${error.message}.`;
+                    ratingMessageElement.style.color = 'red';
+                });
+            } else {
+                ratingMessageElement.textContent = 'Por favor, selecione uma nota para avaliar.';
+                ratingMessageElement.style.color = 'orange';
+            }
+        }
+
+        // Função auxiliar para obter o CSRF token do cookie (copie esta função exatamente)
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+</body>
+</html>
+{% endblock %}

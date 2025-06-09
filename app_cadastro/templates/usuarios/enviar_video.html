@@ -1,0 +1,36 @@
+{% extends 'usuarios/base.html' %}
+{% block conteudo %}
+
+<h2 style="text-align: center;">Enviar Vídeo</h2>
+<form style="text-align: center;" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Enviar</button>
+</form>
+<div style="text-align: center; margin-top: 10px;">
+    <a href="{% url 'lista_videos' %}">Ver vídeos</a>
+</div>
+
+<!-- Botão fixo para mudar o cursor -->
+<button id="botao-cursor" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    z-index: 1000;
+" onclick="ativarCursor()">🎯 Mudar Cursor</button>
+
+<!-- Script para ativar/desativar cursor personalizado -->
+<script>
+  function ativarCursor() {
+    document.documentElement.classList.toggle('cursor-personalizado');
+  }
+</script>
+
+{% endblock %}
