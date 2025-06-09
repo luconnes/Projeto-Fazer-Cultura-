@@ -1,19 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
-from django.contrib.auth.decorators import login_required
 import json
 from .models import Video, Avaliacao # Importe Video e Avaliacao
 from app_cadastro.models import Usuarios # Importe Usuarios
 # Create your views here.
 
-@login_required(login_url='login') # Garante que apenas usuários logados possam acessar
-@require_POST # Aceita apenas requisições POST
+@require_POST
 def avaliar_video(request):
     # Verifica se o usuário está logado usando a sessão personalizada
     usuario_id = request.session.get('usuario_id')
     if not usuario_id:
-        return JsonResponse({'status': 'error', 'message': 'Usuário não autenticado.'}, status=401)
+        return JsonResponse({'status': 'error', 'message': 'Usuário não autenticado. Por favor, faça login.'}, status=401)
 
     try:
         data = json.loads(request.body)
@@ -42,22 +40,16 @@ def avaliar_video(request):
             Avaliacao.objects.create(video=video, usuario=usuario, nota=nota)
             message = 'Avaliação registrada com sucesso!'
 
-        # Recalcula a média de todas as avaliações para este vídeo
-        # Mesmo que video.avaliacao seja IntegerField, calculamos a média float para exibir no frontend
-        avaliacoes_do_video = Avaliacao.objects.filter(video=video)
-        if avaliacoes_do_video.exists():
-            soma_das_notas = sum([a.nota for a in avaliacoes_do_video])
-            quantidade_avaliacoes = avaliacoes_do_video.count()
-            media_calculada = soma_das_notas / quantidade_avaliacoes
+        # Usa os novos métodos do modelo para obter média e total
+        media_calculada = video.get_media_avaliacoes()
+        total_avaliacoes = video.get_total_avaliacoes()
 
-            # Atualiza o campo 'avaliacao' no modelo Video (será truncado para int)
-            video.avaliacao = int(round(media_calculada)) # Arredonda para o inteiro mais próximo
-        else:
-            video.avaliacao = 0 # Nenhuma avaliação
-        video.save()
-
-        # Retorna a média calculada (float) para o frontend exibir formatada
-        return JsonResponse({'status': 'success', 'message': message, 'nova_media': media_calculada})
+        return JsonResponse({
+            'status': 'success',
+            'message': message,
+            'nova_media': media_calculada,
+            'total_avaliacoes': total_avaliacoes
+        })
 
     except Video.DoesNotExist:
         return JsonResponse({'status': 'error', 'message': 'Vídeo não encontrado.'}, status=404)

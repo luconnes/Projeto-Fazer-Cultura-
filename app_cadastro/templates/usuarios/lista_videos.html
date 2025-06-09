@@ -1,4 +1,5 @@
 {% extends 'usuarios/base.html' %}
+{% load static %}
 {% block conteudo %}
 
 
@@ -49,6 +50,7 @@
     <div class="container"> {# Adicionado para centralizar o conteúdo, se o seu base.html não fizer isso #}
         <h1 style="color: black;">Vídeos</h1>
         <a href="{% url 'enviar_video' %}" class="btn btn-primary mb-3">Enviar Novo Vídeo</a> {# Adicionado estilo Bootstrap para o botão #}
+        {% csrf_token %}
         <ul style="list-style-type: none; padding: 0;"> {# Remove os marcadores de lista padrão #}
             {% for video in videos %}
                 <li>
@@ -60,7 +62,10 @@
                     {# Adicionado descrição e informações do usuário que faltavam no seu original #}
                     <p style="color: black;">Descrição: {{ video.descricao }}</p>
                     <p style="color: black;">Enviado por: {{ video.usuario.email }} em {{ video.data_envio|date:"d/m/Y H:i" }}</p>
-                    <p style="color: black;">Avaliação Média: <span id="avg-rating-{{ video.id }}">{{ video.avaliacao|floatformat:1 }}</span> estrelas</p>
+                    <p style="color: black;">
+                        Avaliação Média: <span id="avg-rating-{{ video.id }}">{{ video.get_media_avaliacoes }}</span> estrelas
+                        (<span id="total-avaliacoes-{{ video.id }}">{{ video.get_total_avaliacoes }}</span> avaliações)
+                    </p>
 
                     {# Seção de avaliação que aparecerá abaixo do vídeo #}
                     <div id="rating-section-{{ video.id }}" class="rating-section-hidden">
@@ -101,60 +106,6 @@
             {% endfor %}
         });
 
-        // Função para enviar a avaliação via AJAX
-        function submitRating(videoId) {
-            const selectedRating = document.querySelector(`input[name="rating-${videoId}"]:checked`);
-            const ratingMessageElement = document.getElementById(`rating-message-${videoId}`);
-            const avgRatingElement = document.getElementById(`avg-rating-${videoId}`);
-
-            if (selectedRating) {
-                const nota = parseInt(selectedRating.value); // Garante que a nota seja um número inteiro
-
-                fetch('/videos/avaliar-video/', { // Endpoint da sua view de avaliação
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRFToken': getCookie('csrftoken') // Função para obter o CSRF token
-                    },
-                    body: JSON.stringify({ video_id: videoId, nota: nota })
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        // Se a resposta não for 2xx (ex: 401, 400, 500), tente ler a mensagem de erro
-                        return response.json().then(err => {
-                            throw new Error(err.message || `Erro do servidor: ${response.status}`);
-                        });
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.status === 'success') {
-                        ratingMessageElement.textContent = data.message;
-                        ratingMessageElement.style.color = 'green';
-                        if (data.nova_media !== undefined) {
-                            // Mesmo que o backend salve um int, o frontend pode exibir o float real
-                            avgRatingElement.textContent = data.nova_media.toFixed(1);
-                        }
-                        // Opcional: desabilitar a avaliação após o envio para evitar múltiplas submissões
-                        // document.getElementById(`rating-section-${videoId}`).querySelectorAll('input, button').forEach(el => el.disabled = true);
-                    } else {
-                        // Este bloco pode ser redundante se o `!response.ok` tratar todos os erros
-                        ratingMessageElement.textContent = `Erro: ${data.message}`;
-                        ratingMessageElement.style.color = 'red';
-                    }
-                })
-                .catch(error => {
-                    console.error('Erro ao enviar avaliação:', error);
-                    ratingMessageElement.textContent = `Erro ao enviar avaliação: ${error.message}.`;
-                    ratingMessageElement.style.color = 'red';
-                });
-            } else {
-                ratingMessageElement.textContent = 'Por favor, selecione uma nota para avaliar.';
-                ratingMessageElement.style.color = 'orange';
-            }
-        }
-
-        // Função auxiliar para obter o CSRF token do cookie (copie esta função exatamente)
         function getCookie(name) {
             let cookieValue = null;
             if (document.cookie && document.cookie !== '') {
@@ -168,6 +119,61 @@
                 }
             }
             return cookieValue;
+        }
+
+        function submitRating(videoId) {
+            const selectedRating = document.querySelector(`input[name="rating-${videoId}"]:checked`);
+            const ratingMessageElement = document.getElementById(`rating-message-${videoId}`);
+            const avgRatingElement = document.getElementById(`avg-rating-${videoId}`);
+            const csrftoken = getCookie('csrftoken');
+
+            if (!selectedRating) {
+                ratingMessageElement.textContent = 'Por favor, selecione uma nota para avaliar.';
+                ratingMessageElement.style.color = 'orange';
+                return;
+            }
+
+            const nota = parseInt(selectedRating.value);
+
+            fetch('/videos/avaliar-video/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body: JSON.stringify({
+                    video_id: videoId,
+                    nota: nota
+                })
+            })
+            .then(response => {
+                if (response.status === 401) {
+                    // Se não estiver autenticado, redireciona para a página de login
+                    window.location.href = '{% url "login" %}';
+                    throw new Error('Usuário não autenticado');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status === 'success') {
+                    ratingMessageElement.textContent = data.message;
+                    ratingMessageElement.style.color = 'green';
+                    if (data.nova_media !== undefined) {
+                        avgRatingElement.textContent = data.nova_media.toFixed(1);
+                        document.getElementById(`total-avaliacoes-${videoId}`).textContent = data.total_avaliacoes;
+                    }
+                } else {
+                    ratingMessageElement.textContent = `Erro: ${data.message}`;
+                    ratingMessageElement.style.color = 'red';
+                }
+            })
+            .catch(error => {
+                if (error.message !== 'Usuário não autenticado') {
+                    console.error('Erro ao enviar avaliação:', error);
+                    ratingMessageElement.textContent = 'Erro ao enviar avaliação. Tente novamente.';
+                    ratingMessageElement.style.color = 'red';
+                }
+            });
         }
     </script>
 </body>

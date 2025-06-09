@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 from app_cadastro.models import Usuarios  # importe seu modelo personalizado
 
 class Video(models.Model):
@@ -11,6 +12,13 @@ class Video(models.Model):
 
     def __str__(self):
         return self.titulo
+
+    def get_media_avaliacoes(self):
+        media = self.avaliacoes.aggregate(Avg('nota'))['nota__avg']
+        return round(media, 1) if media is not None else 0.0
+
+    def get_total_avaliacoes(self):
+        return self.avaliacoes.count()
     
 class Avaliacao(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='avaliacoes')
