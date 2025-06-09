@@ -9,7 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_cadastro.urls')),  # home e cadastro de usuários
     path('chat/', include('chat.urls')),     # página do chat
-    
+    path('videos/', include('videos.urls')),
 ]
 
 if settings.DEBUG:

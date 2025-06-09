@@ -12,5 +12,14 @@ class Video(models.Model):
     def __str__(self):
         return self.titulo
     
+class Avaliacao(models.Model):
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name='avaliacoes')
+    usuario = models.ForeignKey(Usuarios, on_delete=models.CASCADE) # Use Usuarios, não settings.AUTH_USER_MODEL
+    nota = models.PositiveIntegerField(choices=[(1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5')])
 
+    class Meta:
+        unique_together = ('video', 'usuario') # Garante que um usuário só avalie um vídeo uma vez
+
+    def __str__(self):
+        return f'{self.usuario.email} - {self.video.titulo} ({self.nota} estrelas)'
 

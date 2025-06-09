@@ -5,7 +5,6 @@ from channels.auth import AuthMiddlewareStack
 import chat.routing  # Certifique-se que o app "chat" está listado no INSTALLED_APPS
 
 # Define o módulo de configurações do Django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'chat.settings')
 
 # Define a aplicação ASGI para lidar com requisições HTTP e WebSocket
 application = ProtocolTypeRouter({
