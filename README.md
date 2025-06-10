@@ -1,6 +1,8 @@
 # 🎬 Projeto Fazer Cultura
 
 Plataforma de streaming dedicada à divulgação de produções artísticas nacionais, com foco em artistas independentes e estudantes.
+---
+[![website](https://fazer-cultura1-db9bb7e9b88b.herokuapp.com)
 
 
 ## 👥 Equipe
