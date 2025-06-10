@@ -173,6 +173,14 @@ Abaixo estão os screencasts das principais funcionalidades do nosso aplicativo.
 
 ### DIAGRAMAS
 [![WhatsApp Image 2025-05-20 at 10 31 05](https://github.com/user-attachments/assets/334e9926-7399-4cdb-bf35-b16fdfa9d1a7)
+![image](https://github.com/user-attachments/assets/3492537e-83b3-4fb0-8916-f8f7a10c2913)
+![image](https://github.com/user-attachments/assets/ee276b0f-7103-45e2-955d-4d595dea3942)
+![image](https://github.com/user-attachments/assets/392cd818-551e-44c0-8e1f-93b8638e4407)
+![image](https://github.com/user-attachments/assets/a6289414-9b57-4071-b80d-f47d738a3b58)
+![image](https://github.com/user-attachments/assets/2eac9215-5e65-44d2-8a04-b5ded7233820)
+
+
+
 
 
 [![WhatsApp Image 2025-05-20 at 10 39 00](https://github.com/user-attachments/assets/2ba2428a-6f18-436e-ad15-fcab018139b9)
