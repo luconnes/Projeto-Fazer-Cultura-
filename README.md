@@ -153,6 +153,16 @@ Abaixo estão os screencasts das principais funcionalidades do nosso aplicativo.
 ---
 [![video 3](https://github.com/user-attachments/assets/ac408cf8-7b4d-4e45-a9a0-5499dd618e87)
 
+---
+
+[![video 4](https://github.com/user-attachments/assets/4ca01d92-105b-4b5f-9a6b-26cd7fe7ff59)
+
+---
+[![video 5](https://github.com/user-attachments/assets/903cfefe-a62e-490e-89c6-3e3bfdf520a5)
+
+---
+[![video 6](https://github.com/user-attachments/assets/64ec53f9-b479-4db3-ad40-c14ca6961b16)
+
 
 ---
 
