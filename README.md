@@ -142,6 +142,8 @@ Abaixo estão os screencasts das principais funcionalidades do nosso aplicativo.
 ### EVIDÊNCAS: PROGRAMAÇÃO EM PARES 
 [![image](https://github.com/user-attachments/assets/6a54b0d9-cdf0-43e9-94d9-982c25f099c4)
 [![image](https://github.com/user-attachments/assets/ab6159b0-1102-4282-a6f0-0b0dc21e9816)
+![image](https://github.com/user-attachments/assets/0f33b593-fd3e-478c-b8f9-9cdd79faab3f)
+
 
 
 
